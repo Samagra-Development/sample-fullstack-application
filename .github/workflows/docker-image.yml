@@ -1,0 +1,29 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Packages
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push backend image
+        working-directory: sample-fullstack-application\backend  # Relative path to the backend directory
+        run: |
+          docker build -t docker.pkg.github.com/glitcher007/sample-fullstack-application/backend:latest .
+          docker push docker.pkg.github.com/glitcher007/sample-fullstack-application/backend:latest
+
+      - name: Build and push frontend image
+        working-directory: sample-fullstack-application\frontend # Relative path to the frontend directory
+        run: |
+          docker build -t docker.pkg.github.com/glitcher007/sample-fullstack-application/frontend:latest .
+          docker push docker.pkg.github.com/glitcher007/sample-fullstack-application/frontend:latest
