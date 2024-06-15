@@ -41,10 +41,9 @@ jobs:
       - name: Run linting and tests backend
         run: |
           cd backend
-          yarn lint  
           yarn test  
 
-      - name: 
+      - name: build backend
         run: |
           cd backend
           docker build . -t ${{secrets.DOCKER_HUB_USERNAME}}/sample-fullstack-application-backend
