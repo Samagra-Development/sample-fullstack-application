@@ -48,10 +48,14 @@ jobs:
           cd backend
           docker build . -t ${{secrets.DOCKER_HUB_USERNAME}}/sample-fullstack-application-backend
       
+      - name: login to docker hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       
       - name: PUSH ARTIFACTS
         run: |
-          echo ${{secrets.DOCKER_HUB_ACCESS_TOKEN}} | docker login -u ${{secrets.DOCKER_HUB_USERNAME}} --password-stdin
           docker push ${{secrets.DOCKER_HUB_USERNAME}}/sample-fullstack-application-frontend
           docker push ${{secrets.DOCKER_HUB_USERNAME}}/sample-fullstack-application-backend
       
