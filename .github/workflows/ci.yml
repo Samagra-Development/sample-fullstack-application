@@ -51,8 +51,9 @@ jobs:
 
       - name: Run e2e tests
         run: |
-          docker compose up 
+          docker compose up -d
           docker compose exec backend yarn run test:e2e
+          
 
 
       - name: PUSH ARTIFACTS
