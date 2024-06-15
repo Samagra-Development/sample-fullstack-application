@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main  
-      - feature/container
 
 jobs:
   build:
