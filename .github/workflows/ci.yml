@@ -23,25 +23,31 @@ jobs:
           cd frontend
           yarn install 
 
-      - name: Run linting backend
+      - name: Run linting frontend
         run: |
+          cd frontend
           yarn lint  
 
       - name: build frontend
-        run: docker build . -t $DOCKER_HUB_USERNAME/sample-fullstack-application-frontend
+        run: |
+          cd frontend
+          docker build . -t $DOCKER_HUB_USERNAME/sample-fullstack-application-frontend
 
       - name: install dependencies backend
         run: |
-          cd ../backend
+          cd backend
           yarn install
 
       - name: Run linting and tests backend
         run: |
+          cd backend
           yarn lint  
           yarn test  
 
       - name: 
-        run: docker build . -t $DOCKER_HUB_USERNAME/sample-fullstack-application-backend
+        run: |
+          cd backend
+          docker build . -t $DOCKER_HUB_USERNAME/sample-fullstack-application-backend
       
 
       - name: Run e2e tests
