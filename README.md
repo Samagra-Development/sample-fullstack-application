@@ -5,3 +5,4 @@ Set the environment variables using .env refer sampl.env
 ```
 docker compose up -d
 ```
+VISIT http://localhost 
